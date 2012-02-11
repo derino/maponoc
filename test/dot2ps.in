@@ -1,0 +1,16 @@
+#!@BASH@
+
+#if [ $# -eq 0 ]
+#  then
+#    echo "No arguments supplied"
+#fi
+
+if [ -z "$1" ]; then
+    echo "usage: dot2ps dot_file"
+    exit;
+fi
+
+dotfile=$1
+                                                                                                                          
+dot -Tps -o$dotfile.ps $dotfile
+

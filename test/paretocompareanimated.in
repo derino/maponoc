@@ -1,0 +1,41 @@
+#!@BASH@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+bindir=@bindir@
+
+if [ -z "$1" ]; then
+    echo "usage: paretocompareanimated base_tbl_file"
+    exit;
+fi
+
+# paretocompareanimated pareto_set_lpmapper_timelimit1000.tbl
+
+# PARETO POINTS, P POPULATION, Q POPULATION BY GENERATIONS
+# create gif files
+for file in `ls *_gen_*.tbl`
+do
+    export TBL_FILE=$file
+    export TBL_FILE2=$1
+    gnuplot ${bindir}/paretocomparegif.gp
+#    read -p "Press any key to continue with the next generation..."
+done
+
+# create a mpeg4 video of gif files for PARETO POINTS
+ffmpeg -r 5 -i pareto_set_gamapper_gen_%d.tbl.gif -acodec aac -vcodec mpeg4 -b 96000 -mbd 2 -s 640x480 pareto_set_gamapper.mp4
+
+# create a mpeg4 video of gif files for P POPULATION POINTS
+ffmpeg -r 5 -i population_P_gen_%d.tbl.gif -acodec aac -vcodec mpeg4 -b 96000 -mbd 2 -s 640x480 population_P.mp4
+
+# create a mpeg4 video of gif files for Q POPULATION POINTS
+ffmpeg -r 5 -i population_Q_gen_%d.tbl.gif -acodec aac -vcodec mpeg4 -b 96000 -mbd 2 -s 640x480 population_Q.mp4
+
+
+
+# gif
+# ffmpeg -f image2 -i pareto_set_gamapper_gen_%d.tbl.gif -pix_fmt rgb24 video.gif
+
+# mpeg
+# ffmpeg -r 5 -f image2 -i pareto_set_gamapper_gen_%d.tbl.gif video.mpg
+
+# flv
+# ffmpeg -r 5 -i pareto_set_gamapper_gen_%d.tbl.gif -ab 56 -ar 44100 -b 8000 -s 640x480 -f flv video.flv

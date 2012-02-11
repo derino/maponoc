@@ -1,0 +1,14 @@
+#!@BASH@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+bindir=@bindir@
+
+if [ -z "$2" ]; then
+    echo "usage: paretocomparemttfcomp first_tbl_file second_tbl_file"
+    exit;
+fi
+
+export TBL_FILE=$1
+export TBL_FILE2=$2
+gnuplot -persist ${bindir}/paretocomparemttfcomp.gp
+

@@ -1,0 +1,15 @@
+#!@BASH@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+bindir=@bindir@
+
+if [ -z "$2" ]; then
+    echo "usage: paretocomparemttftc first_tbl_file second_tbl_file throughput_constraint"
+    exit;
+fi
+
+export TBL_FILE=$1
+export TBL_FILE2=$2
+export TC=$3
+gnuplot -persist ${bindir}/paretocomparemttftc.gp
+

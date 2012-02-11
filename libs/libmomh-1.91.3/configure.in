@@ -1,0 +1,77 @@
+# Process this file with autoconf to produce a configure script.
+
+# autoconf requirement
+AC_PREREQ([2.52])
+
+# Init autoconf and automake
+AC_INIT([libmomh], [1.91.3], [gdx@poczta.fm])
+AC_CANONICAL_SYSTEM
+AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
+AM_MAINTAINER_MODE
+AC_CONFIG_HEADERS(libmomh/libmomh-config.h)
+
+# not ready yet to be shared library
+AC_DISABLE_SHARED
+AC_CHECK_PROG(PKGCONFIG, [pkg-config], [yes])
+PKG_CHECK_MODULES(SIGC, sigc++-2.0)
+
+
+# On making releases:
+#   MOMH_MICRO_VERSION += 1;
+#   MOMH_INTERFACE_AGE += 1;
+#   MOMH_BINARY_AGE += 1;
+# if any functions have been added, set MOMH_INTERFACE_AGE to 0.
+# if backwards compatibility has been broken,
+# set MOMH_BINARY_AGE _and_ MOMH_INTERFACE_AGE to 0.
+MOMH_MAJOR_VERSION=0
+MOMH_MINOR_VERSION=0
+MOMH_MICRO_VERSION=0
+MOMH_INTERFACE_AGE=0
+MOMH_BINARY_AGE=0
+LIBMOMH_VERSION=$MOMH_MAJOR_VERSION.$MOMH_MINOR_VERSION.$MOMH_MICRO_VERSION
+
+AC_SUBST(MOMH_MAJOR_VERSION)
+AC_SUBST(MOMH_MINOR_VERSION)
+AC_SUBST(MOMH_MICRO_VERSION)
+AC_SUBST(LIBMOMH_VERSION)
+AC_SUBST(MOMH_INTERFACE_AGE)
+AC_SUBST(MOMH_BINARY_AGE)
+
+
+# libtool versioning
+LT_RELEASE=$MOMH_MAJOR_VERSION.$MOMH_MINOR_VERSION
+LT_CURRENT=`expr $MOMH_MICRO_VERSION - $MOMH_INTERFACE_AGE`
+LT_REVISION=$MOMH_INTERFACE_AGE
+LT_AGE=`expr $MOMH_BINARY_AGE - $MOMH_INTERFACE_AGE`
+LT_CURRENT_MINUS_AGE=`expr $LT_CURRENT - $LT_AGE`
+AC_SUBST(LT_RELEASE)
+AC_SUBST(LT_CURRENT)
+AC_SUBST(LT_REVISION)
+AC_SUBST(LT_AGE)
+AC_SUBST(LT_CURRENT_MINUS_AGE)
+
+# Define version stuff
+AC_DEFINE_UNQUOTED(MOMH_MAJOR_VERSION, $MOMH_MAJOR_VERSION, [libmomh major version])
+AC_DEFINE_UNQUOTED(MOMH_MINOR_VERSION, $MOMH_MINOR_VERSION, [libmomh minor version])
+AC_DEFINE_UNQUOTED(MOMH_MICRO_VERSION, $MOMH_MICRO_VERSION, [libmomh micro version])
+AC_DEFINE_UNQUOTED(MOMH_INTERFACE_AGE, $MOMH_INTERFACE_AGE, [libmomh interface age])
+AC_DEFINE_UNQUOTED(MOMH_BINARY_AGE, $MOMH_BINARY_AGE, [libmomh binary age])
+
+###############################
+# Check for programs
+AC_PROG_CC
+AC_PROG_CXX
+AM_PROG_CC_STDC
+AC_PROG_INSTALL
+AC_PROG_MAKE_SET
+AC_CHECK_PROG(PKGCONFIG, [pkg-config], [yes])
+AM_PROG_LIBTOOL
+
+AC_CONFIG_FILES([
+	Makefile
+	doc/Makefile
+	doc/reference/Makefile
+	doc/reference/Doxyfile
+	libmomh/Makefile
+	libmomh.pc])
+AC_OUTPUT

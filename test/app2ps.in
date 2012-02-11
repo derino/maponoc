@@ -1,0 +1,18 @@
+#!@BASH@
+
+#if [ $# -eq 0 ]
+#  then
+#    echo "No arguments supplied"
+#fi
+
+if [ -z "$2" ]; then
+    echo "usage: app2ps app_file pro_file"
+    exit;
+fi
+
+app=$1
+pro=$2
+                                                                                                                          
+app2dot $app $pro
+dot -Tps -o$app.ps $app.dot
+

@@ -1,0 +1,91 @@
+Thanks to its license, we are distributing a slightly modified version of
+MOMHLib++ within maponoc. Some fixes to get it working with newer gcc
+versions and some bug fixes are done.
+--Onur
+
+===== Original README is below ==============================================
+
+MOMHLib++ (Multiple Objective MetaHeuristics Library in C++) is a library 
+of C++ classes that implements a number of multiple objective metaheuristics. 
+It has been developed on the basis of former implementations of Pareto 
+simulated annealing (PSA) and multiple objective genetic local search (MOGLS).
+The goals of development of the library may be summarized as follows:
+
+-	to implement the main multiple objective metaheuristics in a 
+	consistent way
+-	to allow easy adaptation of the methods to a given problem
+-	to support evaluation of multiple objective metaheuristics on a given 
+	problem
+-	to allow easy incorporation of new multiple objective metaheuristics 
+	and to support the development of new methods
+
+At present the library includes the following methods:
+
+-	Pareto simulated annealing (PSA) 
+	[http://www-idss.cs.put.poznan.pl/~jaszkiewicz/psa/index.html]
+-	Serafini's multiple objective simulated annealing (SMOSA)[4][5]
+-	Ulungu's et al. multiple objective simulated annealing (MOSA) [7]
+-	Pareto memetic algorithm [8]
+-	multiple objective genetic local search (MOGLS) MOGLS
+	[http://www-idss.cs.put.poznan.pl/~jaszkiewicz/mogls/index.html]
+-	Ishibuchi's and Murata's multiple objective genetic local search 
+	(IMMOGLS) [3]
+-	multiple objective multiple start local search (MOMSLS)
+-	non-dominated sorting genetic algorithm (NSGA) [6] and controlled 
+	NSGA II [1]
+-	Strength Pareto Evolutionary Algorithm [9]
+
+Each method is implemented in a separate template class that utilizes a number 
+of common library classes. The template classes are instantiated with classes 
+corresponding to solutions of a given problem.
+
+In order to adapt one or more of the multiple objective metaheuristics to 
+a given problem one has to implement a new class corresponding to the problem's
+solution by deriving from the library class TMOMHSolution. A detailed design 
+pattern described in the documentation of MOMHLib++ illustrates the suggested 
+way of adapting the library to a given problem.
+
+The library is implemented in standard C++. It uses standard template 
+library - STL. Thus, it may be compiled under any standard C++ compiler.
+
+Bibliography:
+
+1. Deb K. , Goel T. (2001), Controlled elitist non-dominated sorting genetic 
+algorithms for better convergence, in: E. Zitzler, K. Deb, L. Thiele, C.A. 
+Coello Coello, D. Corne (eds.) Proceedings of the First International 
+Conference on Evolutionary Multi-Criterion Optimization, Lecture Notes in 
+Computer Science 1993, Springer, Berlin, 67-81.
+
+2. Fonseca C.M., Fleming P.J. (1993), Genetic algorithms for multiobjective 
+optimization: Formulation, discussion and generalization. In Forrest S. (ed.),
+Genetic Algorithms: Proceedings of 5th International Conference, San Mateo, 
+CA, Morgan Kaufmann, 416-423.
+
+3. Ishibuchi H. Murata T. (1998), Multi-Objective Genetic Local Search 
+Algorithm and Its Application to Flowshop Scheduling. IEEE Transactions on 
+Systems, Man and Cybernetics, 28, 3, 392-403.
+
+4. Serafini P. (1992), Simulated annealing for multiple objective optimization
+problems. Proceedings of the Tenth International Conference on Multiple  
+Criteria Decision Making, Taipei 19-24.07.92, vol. 1, 87-96.
+
+5. Serafini P. (1994), Simulated annealing for multiple objective optimization 
+problems. In: Tzeng G.H., Wang H.F., Wen V.P., Yu P.L. (eds), Multiple 
+Criteria Decision Making. Expand and Enrich the Domains of Thinking and 
+Application, Springer Verlag, 283-292.
+
+6. Srinivas N., Deb K. (1994), Multiple objective optimization using 
+nondominated sorting in genetic algorithms, Evolutionary Computation, 2, 2, 221-248.  
+
+7. Ulungu E.L., Teghem J., Fortemps Ph., Tuyttens D. (1999), MOSA method: a 
+tool for solving multiobjective combinatorial optimization problems. Journal 
+of Multi-Criteria Decision Analysis, 8, 221-236.
+
+8. A. Jaszkiewicz (2001), A comparative study of multiple-objective 
+metaheuristics on the bi-objective set covering problem and the Pareto memetic 
+algorithm. Research report, Institute of Computing Science, Poznan University 
+of Technology, RA-003/01, pp. 23.
+
+9. Zitzler E., Thiele L. (1999), Multiobjective Evolutionary Algorithms: 
+A Comparative Case Study and the Strength Pareto Evolutionary Algorithm, 
+IEEE Transactions on Evolutionary Computation, 3, 4, 257-271.
